@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtBiddo - Casa de Subastas Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>ArtBiddo</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active" data-page="home">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+                    <a href="#auctions" class="nav-link" data-page="auctions">
+                        <i class="fas fa-gavel"></i> Subastas de ArtBiddo
+                    </a>
+                    <a href="#client-auctions" class="nav-link" data-page="client-auctions">
+                        <i class="fas fa-users"></i> Subastas de Clientes
+                    </a>
+
+                    <a href="#store" class="nav-link" data-page="store">
+                        <i class="fas fa-store"></i> Tienda
+                    </a>
+
+                    <a href="#how-it-works" class="nav-link" data-page="how-it-works">
+                        <i class="fas fa-info-circle"></i> Cómo funciona
+                    </a>
+                    <a href="#submit-artwork" class="nav-link" data-page="submit-artwork">
+                        <i class="fas fa-paint-brush"></i> ¿Tienes obras?
+                    </a>
+                    <a href="#my-bids" class="nav-link protected-nav" data-page="my-bids" style="display: none;">
+                        <i class="fas fa-hand-paper"></i> Mis Pujas
+                    </a>
+                    <a href="#tokens" class="nav-link protected-nav" data-page="tokens" style="display: none;">
+                        <i class="fas fa-coins"></i> Tokens
+                    </a>
+                    <a href="#profile" class="nav-link protected-nav" data-page="profile" style="display: none;">
+                        <i class="fas fa-user"></i> Perfil
+                    </a>
+                    <a href="#create" class="nav-link admin-only" data-page="create" style="display: none;">
+                        <i class="fas fa-plus"></i> Crear
+                    </a>
+                    <a href="#admin" class="nav-link admin-only" data-page="admin" style="display: none;">
+                        <i class="fas fa-cogs"></i> Admin
+                    </a>
+                </nav>
+                <div class="user-actions">
+                    <div class="tokens-display" style="display: none;">
+                        <i class="fas fa-coins"></i>
+                        <span id="userTokens">0</span> tokens
+                    </div>
+                    <button class="btn btn-primary" onclick="showAuthModal()">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <!-- 🔝 Hero Section (Encabezado Principal) -->
+            <div class="hero-professional">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                    <video autoplay muted loop class="hero-video">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-auction-house-with-art-pieces-4444-large.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            Bienvenido a <span class="highlight">ArtBiddo</span>, la comunidad líder en subastas online en tiempo real
+                        </h1>
+                        <p class="hero-subtitle">
+                            Miles de usuarios pujando cada día por artículos únicos y oportunidades irrepetibles
+                        </p>
+                        
+                        <!-- Estadísticas dinámicas en tiempo real -->
+                        <div class="hero-stats-real-time">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                        </div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="activeUsersNow">0</span>
+                                    <span class="stat-label">Usuarios activos ahora</span>
+                        </div>
+                        </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-fire"></i>
+                        </div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="activeAuctionsNow">0</span>
+                                    <span class="stat-label">Subastas activas</span>
+                    </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="totalBidsToday">0</span>
+                                    <span class="stat-label">Pujas totales hoy</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones CTA -->
+                        <div class="hero-cta">
+                            <button class="btn btn-primary-hero" onclick="showPage('auctions')">
+                                <i class="fas fa-search"></i> Ver Subastas
+                        </button>
+                            <button class="btn btn-secondary-hero admin-only" onclick="showPage('create')" style="display: none;">
+                            <i class="fas fa-plus"></i> Crear Subasta
+                        </button>
+                            <button class="btn btn-outline-hero" onclick="showAuthModal()">
+                                <i class="fas fa-user-plus"></i> Registrarse / Iniciar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⭐️ Sección: Subastas Destacadas -->
+            <div class="featured-section-professional">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Subastas Destacadas</h2>
+                        <p class="section-subtitle">Descubre las oportunidades más atractivas de nuestra plataforma</p>
+                    </div>
+                    <div id="featuredAuctionsPro" class="featured-grid">
+                        <!-- Featured auctions will be loaded here -->
+                    </div>
+                    <div class="view-all-cta">
+                        <button class="btn btn-outline" onclick="showPage('auctions')">
+                            Ver todas las subastas <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔍 Buscador Inteligente -->
+            <div class="smart-search-section">
+                <div class="container">
+                    <div class="search-container">
+                        <h3 class="search-title">Encuentra exactamente lo que buscas</h3>
+                        <div class="search-box">
+                            <input type="text" id="homeSearch" placeholder="Buscar subastas, artistas, categorías..." class="search-input-main">
+                            <div class="search-filters">
+                                <select id="homeCategory" class="filter-select-home">
+                                    <option value="">Todas las categorías</option>
+                                    <option value="Pintura">Pintura</option>
+                                    <option value="Escultura">Escultura</option>
+                                    <option value="Fotografía">Fotografía</option>
+                                    <option value="Arte Digital">Arte Digital</option>
+                                    <option value="Antigüedades">Antigüedades</option>
+                                </select>
+                                <select id="homePriceRange" class="filter-select-home">
+                                    <option value="">Cualquier precio</option>
+                                    <option value="0-50">Hasta 50 tokens</option>
+                                    <option value="50-200">50-200 tokens</option>
+                                    <option value="200-500">200-500 tokens</option>
+                                    <option value="500+">Más de 500 tokens</option>
+                                </select>
+                                <select id="homeTimeFilter" class="filter-select-home">
+                                    <option value="">Cualquier tiempo</option>
+                                    <option value="ending-soon">Terminando pronto</option>
+                                    <option value="new">Recién publicadas</option>
+                                    <option value="popular">Más populares</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-search" onclick="performHomeSearch()">
+                                <i class="fas fa-search"></i> Buscar ahora
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎥 ¿Cómo funciona? (Sección educativa rápida) -->
+            <div class="how-it-works-section">
+                <div class="container">
+                    <h2 class="section-title">¿Cómo funciona?</h2>
+                    <p class="section-subtitle">En 3 simples pasos puedes empezar a pujar</p>
+                    
+                    <div class="steps-container">
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3 class="step-title">Regístrate gratis</h3>
+                            <p class="step-description">Crea tu cuenta en segundos y recibe tokens de bienvenida</p>
+                        </div>
+                        
+                        <div class="step-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3 class="step-title">Encuentra una subasta</h3>
+                            <p class="step-description">Explora cientos de obras únicas y encuentra tu favorita</p>
+                        </div>
+                        
+                        <div class="step-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h3 class="step-title">Haz tu puja y gana</h3>
+                            <p class="step-description">Puja en tiempo real y llévate obras exclusivas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="how-it-works-cta">
+                        <button class="btn btn-primary" onclick="showAuthModal()">
+                            Empezar ahora <i class="fas fa-rocket"></i>
+                        </button>
+                        <button class="btn btn-outline" onclick="showPage('how-it-works')">
+                            Ver detalles completos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🛡️ Confianza y Seguridad -->
+            <div class="trust-section">
+                <div class="container">
+                    <h2 class="section-title">Tu seguridad es nuestra prioridad</h2>
+                    
+                    <div class="trust-features">
+                        <div class="trust-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Pagos seguros</h4>
+                            <p>Transacciones protegidas con encriptación SSL</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Protección al comprador</h4>
+                            <p>Garantía de devolución si no recibes tu obra</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-headset"></i>
+                            <h4>Soporte 24/7</h4>
+                            <p>Atención personalizada cuando la necesites</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-certificate"></i>
+                            <h4>Obras certificadas</h4>
+                            <p>Cada pieza verificada por nuestros expertos</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonials">
+                        <h3>Lo que dicen nuestros usuarios</h3>
+                        <div class="testimonials-grid">
+                            <div class="testimonial-item">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <p>"Increíble plataforma, gané mi primera obra en mi segunda puja"</p>
+                                <span class="testimonial-author">- María G.</span>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <p>"Seguro, rápido y muy emocionante. ¡Totalmente recomendado!"</p>
+                                <span class="testimonial-author">- Carlos R.</span>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <p>"La mejor experiencia de compra de arte online que he tenido"</p>
+                                <span class="testimonial-author">- Ana L.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-link">
+                        <button class="btn btn-outline" onclick="showPage('how-it-works')">
+                            <i class="fas fa-question-circle"></i> Preguntas Frecuentes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ArtBiddo Auctions Page -->
+        <section id="auctions" class="page">
+            <div class="container">
+                <h1>Subastas de ArtBiddo</h1>
+                <div id="maintenanceNoticeAuctions" class="maintenance-notice" style="display: none;">
+                    <div class="maintenance-content">
+                        <i class="fas fa-tools"></i>
+                        <h3>🔧 Mantenimiento en Progreso</h3>
+                        <p>Estamos preparando nuevas subastas exclusivas de ArtBiddo.</p>
+                        <p><strong>En breve podrás ver y participar en nuestras próximas pujas.</strong></p>
+                        <div class="maintenance-info">
+                            <i class="fas fa-clock"></i> Vuelve pronto para descubrir obras únicas
+                        </div>
+                    </div>
+                </div>
+                <div class="page-header">
+                    <div class="filters">
+                        <input type="text" id="searchAuctions" placeholder="Buscar subastas..." class="search-input">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="">Todas las categorías</option>
+                            <option value="Pintura">Pintura</option>
+                            <option value="Escultura">Escultura</option>
+                            <option value="Fotografía">Fotografía</option>
+                            <option value="Arte Digital">Arte Digital</option>
+                            <option value="Antigüedades">Antigüedades</option>
+                        </select>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">Todos los estados</option>
+                            <option value="active">Activas</option>
+                            <option value="ending-soon">Terminando Pronto</option>
+                            <option value="ended">Finalizadas</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="auctionsGrid" class="auctions-grid">
+                    <!-- Auctions will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Auctions Page -->
+        <section id="client-auctions" class="page">
+            <div class="container">
+                <h1>Subastas de Clientes</h1>
+                <div id="maintenanceNoticeClients" class="maintenance-notice" style="display: none;">
+                    <div class="maintenance-content">
+                        <i class="fas fa-users"></i>
+                        <h3>🔧 Mantenimiento en Progreso</h3>
+                        <p>Estamos configurando el sistema de subastas de nuestros clientes.</p>
+                        <p><strong>Muy pronto podrás ver las obras que nuestros usuarios han puesto en subasta.</strong></p>
+                        <div class="maintenance-info">
+                            <i class="fas fa-info-circle"></i> ¿Quieres vender tu obra? <a href="#submit-artwork" onclick="showPage('submit-artwork')">Contáctanos aquí</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-header">
+                    <div class="filters">
+                        <input type="text" id="searchClientAuctions" placeholder="Buscar subastas de clientes..." class="search-input">
+                        <select id="clientCategoryFilter" class="filter-select">
+                            <option value="">Todas las categorías</option>
+                            <option value="Pintura">Pintura</option>
+                            <option value="Escultura">Escultura</option>
+                            <option value="Fotografía">Fotografía</option>
+                            <option value="Arte Digital">Arte Digital</option>
+                            <option value="Antigüedades">Antigüedades</option>
+                        </select>
+                        <select id="clientStatusFilter" class="filter-select">
+                            <option value="">Todos los estados</option>
+                            <option value="active">Activas</option>
+                            <option value="ending-soon">Terminando Pronto</option>
+                            <option value="ended">Finalizadas</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="clientAuctionsGrid" class="auctions-grid">
+                    <!-- Client auctions will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Create Auction Page -->
+        <section id="create" class="page">
+            <div class="container">
+                <h1>Crear Nueva Subasta</h1>
+                <form id="auctionForm" class="auction-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemTitle">Título del Lote</label>
+                            <input type="text" id="itemTitle" name="itemTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Categoría</label>
+                            <select id="category" name="category" required>
+                                <option value="">Seleccionar categoría</option>
+                                <option value="Pintura">Pintura</option>
+                                <option value="Escultura">Escultura</option>
+                                <option value="Fotografía">Fotografía</option>
+                                <option value="Arte Digital">Arte Digital</option>
+                                <option value="Antigüedades">Antigüedades</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startingPrice">Precio Inicial (tokens)</label>
+                            <input type="number" id="startingPrice" name="startingPrice" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reservePrice">Precio de Reserva (opcional)</label>
+                            <input type="number" id="reservePrice" name="reservePrice" min="1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Fecha de Inicio</label>
+                            <input type="datetime-local" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Fecha de Fin</label>
+                            <input type="datetime-local" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDescription">Descripción</label>
+                        <textarea id="itemDescription" name="itemDescription" rows="4" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="condition">Estado del Lote</label>
+                            <select id="condition" name="condition">
+                                <option value="">Seleccionar estado</option>
+                                <option value="Excelente">Excelente</option>
+                                <option value="Muy Bueno">Muy Bueno</option>
+                                <option value="Bueno">Bueno</option>
+                                <option value="Regular">Regular</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="provenance">Procedencia</label>
+                            <input type="text" id="provenance" name="provenance">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemImages">Imágenes del Lote</label>
+                        <div id="imagePreview" class="image-preview">
+                            <i class="fas fa-images"></i>
+                            <p>Haz clic para seleccionar imágenes (múltiples)</p>
+                        </div>
+                        <input type="file" id="itemImages" name="itemImages" multiple accept="image/*" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Crear Subasta
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearAuctionForm()">
+                            <i class="fas fa-times"></i> Limpiar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- My Bids Page -->
+        <section id="my-bids" class="page">
+            <div class="container">
+                <h1>Mis Pujas</h1>
+                <div id="myBidsList" class="bids-list">
+                    <!-- User bids will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokens Page -->
+        <section id="tokens" class="page">
+            <div class="container">
+                <h1>Comprar Tokens</h1>
+                <div class="tokens-container">
+                    <div class="tokens-packages">
+                        <div class="package-card" onclick="selectPackage(10)">
+                            <h3>10 Tokens</h3>
+                            <div class="price">€10</div>
+                            <div class="bonus">Sin bonificación</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(50)">
+                            <h3>60 Tokens</h3>
+                            <div class="price">€50</div>
+                            <div class="bonus">+10 tokens gratis</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(100)">
+                            <h3>130 Tokens</h3>
+                            <div class="price">€100</div>
+                            <div class="bonus">+30 tokens gratis</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(250)">
+                            <h3>350 Tokens</h3>
+                            <div class="price">€250</div>
+                            <div class="bonus">+100 tokens gratis</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(500)">
+                            <h3>750 Tokens</h3>
+                            <div class="price">€500</div>
+                            <div class="bonus">+250 tokens gratis</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(1000)">
+                            <h3>1600 Tokens</h3>
+                            <div class="price">€1000</div>
+                            <div class="bonus">+600 tokens gratis</div>
+                        </div>
+                        <div class="package-card" onclick="selectPackage(2000)">
+                            <h3>3500 Tokens</h3>
+                            <div class="price">€2000</div>
+                            <div class="bonus">+1500 tokens gratis</div>
+                        </div>
+                    </div>
+                    <div class="tokens-history">
+                        <h3>Historial de Compras</h3>
+                        <div id="tokensHistory">
+                            <!-- Transaction history will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Page -->
+        <section id="profile" class="page">
+            <div class="container">
+                <h1>Mi Perfil</h1>
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                                            <div class="profile-info">
+                        <h2 id="userName">Usuario</h2>
+                        <p id="userEmail">No has iniciado sesión</p>
+                    </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span id="userBids">0</span>
+                            <label>Pujas Realizadas</label>
+                        </div>
+                        <div class="stat">
+                            <span id="userWins">0</span>
+                            <label>Subastas Ganadas</label>
+                        </div>
+                        <div class="stat">
+                            <span id="userTokensDisplay">0</span>
+                            <label>Tokens Disponibles</label>
+                        </div>
+                        <div class="stat">
+                            <span id="userAuctions">0</span>
+                            <label>Subastas Creadas</label>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" onclick="enableAdminMode()" id="enableAdminBtn" style="display: none;">
+                            <i class="fas fa-crown"></i> Activar Modo Admin
+                        </button>
+                        <button class="btn btn-secondary" onclick="disableAdminMode()" id="disableAdminBtn" style="display: none;">
+                            <i class="fas fa-user"></i> Desactivar Modo Admin
+                        </button>
+                        <button class="btn btn-danger" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </button>
+                        <button class="btn btn-info" onclick="testRegistration()" style="margin-top: 10px;">
+                            <i class="fas fa-bug"></i> Probar Registro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Page -->
+        <section id="how-it-works" class="page">
+            <div class="container">
+                <h1>¿Cómo funciona ArtBiddo?</h1>
+                <div class="info-content">
+                    <div class="info-step">
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3>1. Regístrate</h3>
+                        <p>Crea tu cuenta gratuita en ArtBiddo para acceder a todas las subastas de arte.</p>
+                    </div>
+                    
+                    <div class="info-step">
+                        <div class="step-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>2. Compra tokens</h3>
+                        <p>Adquiere tokens (1€ = 1 token) para participar en las pujas. Diferentes paquetes disponibles.</p>
+                    </div>
+                    
+                    <div class="info-step">
+                        <div class="step-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>3. Puja en subastas</h3>
+                        <p>Explora nuestras subastas de arte único y puja por las obras que más te gusten.</p>
+                    </div>
+                    
+                    <div class="info-step">
+                        <div class="step-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>4. ¡Gana y disfruta!</h3>
+                        <p>Si ganas una subasta, la obra de arte será tuya. ¡Disfruta de tu nueva adquisición artística!</p>
+                    </div>
+                </div>
+                
+                <div class="info-details">
+                    <h2>Información adicional</h2>
+                    <div class="detail-grid">
+                        <div class="detail-card">
+                            <h4>Sistema de pujas</h4>
+                            <p>Las pujas incrementan de 1 en 1 token. Cada puja reinicia el contador de 10 segundos.</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Seguridad</h4>
+                            <p>Todas las transacciones son seguras y tu información está protegida.</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Obras auténticas</h4>
+                            <p>Todas las obras son verificadas y autenticadas por nuestro equipo de expertos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Store Page -->
+        <section id="store" class="page">
+            <div class="container">
+                <!-- Store Info Banner -->
+                <div class="store-info-banner">
+                    <div class="store-info-content">
+                        <div class="store-info-header">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Venta Directa ArtBiddo</h3>
+                            </div>
+                        <div class="store-info-details">
+                            <div class="store-info-item">
+                                <i class="fas fa-handshake"></i>
+                                <span><strong>Sin intermediarios:</strong> Compra directa sin comisiones adicionales</span>
+                            </div>
+                            <div class="store-info-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span><strong>Artistas certificados:</strong> Todos con currículum o certificado profesional</span>
+                        </div>
+                            <div class="store-info-item">
+                                <i class="fas fa-award"></i>
+                                <span><strong>Obras graduadas:</strong> Creaciones de artistas semi-profesionales y graduados</span>
+                                </div>
+                            <div class="store-info-item">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span><strong>Envío garantizado:</strong> Todos los envíos se realizan 7 días después de la compra</span>
+                                </div>
+                            <div class="store-info-item">
+                                <i class="fas fa-gem"></i>
+                                <span><strong>Ediciones limitadas:</strong> Algunas obras están disponibles en series numeradas exclusivas</span>
+                            </div>
+                            <div class="store-info-item">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span><strong>Recompensas mensuales:</strong> Cuantos más tokens compres, más te devolveremos a final de mes</span>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                
+                <div class="store-filters">
+                    <select id="storeCategory" onchange="filterStoreItems()">
+                        <option value="">Todas las categorías</option>
+                        <option value="Pintura">Pintura</option>
+                        <option value="Escultura">Escultura</option>
+                        <option value="Fotografía">Fotografía</option>
+                        <option value="Arte Digital">Arte Digital</option>
+                    </select>
+                    
+                    <select id="storePriceRange" onchange="filterStoreItems()">
+                        <option value="">Todos los precios finales</option>
+                        <option value="0-300">0 - 300 tokens</option>
+                        <option value="300-800">300 - 800 tokens</option>
+                        <option value="800-1500">800 - 1500 tokens</option>
+                        <option value="1500+">1500+ tokens</option>
+                    </select>
+                </div>
+                
+                <div class="store-grid" id="storeItemsContainer">
+                    <!-- Store items will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Submit Artwork Page -->
+        <section id="submit-artwork" class="page">
+            <div class="container">
+                <h1>¿Tienes obras de arte?</h1>
+                <div class="submit-content">
+                    <div class="submit-intro">
+                        <p>Si posees obras de arte únicas y deseas incluirlas en nuestras subastas, estamos interesados en conocer tu colección.</p>
+                    </div>
+                    
+                    <div class="submit-form-container">
+                        <form class="submit-form" id="artworkSubmissionForm">
+                            <h3>Envíanos información sobre tu obra</h3>
+                            
+                            <div class="form-group">
+                                <label for="artistName">Nombre del artista</label>
+                                <input type="text" id="artistName" name="artistName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="artworkTitle">Título de la obra</label>
+                                <input type="text" id="artworkTitle" name="artworkTitle" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="artworkYear">Año de creación</label>
+                                <input type="number" id="artworkYear" name="artworkYear" min="1800" max="2024">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="artworkTechnique">Técnica/Material</label>
+                                <input type="text" id="artworkTechnique" name="artworkTechnique" placeholder="Ej: Óleo sobre lienzo, Acuarela, Escultura...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="artworkDimensions">Dimensiones</label>
+                                <input type="text" id="artworkDimensions" name="artworkDimensions" placeholder="Ej: 100x80 cm">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ownerName">Tu nombre completo</label>
+                                <input type="text" id="ownerName" name="ownerName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ownerEmail">Tu email de contacto</label>
+                                <input type="email" id="ownerEmail" name="ownerEmail" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ownerPhone">Teléfono (opcional)</label>
+                                <input type="tel" id="ownerPhone" name="ownerPhone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="artworkDescription">Descripción de la obra</label>
+                                <textarea id="artworkDescription" name="artworkDescription" rows="4" placeholder="Cuéntanos sobre la historia, procedencia, estado de conservación..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="estimatedValue">Valor estimado (opcional)</label>
+                                <input type="number" id="estimatedValue" name="estimatedValue" placeholder="En euros">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                <i class="fas fa-paper-plane"></i> Enviar información
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="submit-info">
+                        <h3>Proceso de evaluación</h3>
+                        <ul>
+                            <li>Revisamos toda la información enviada</li>
+                            <li>Nuestros expertos evalúan la obra</li>
+                            <li>Te contactamos para acordar detalles</li>
+                            <li>Si se acepta, programamos la subasta</li>
+                        </ul>
+                        
+                        <div class="contact-info">
+                            <h4>¿Necesitas ayuda?</h4>
+                            <p>Contáctanos en: <strong>obras@artbiddo.es</strong></p>
+                            <p>Teléfono: <strong>+34 900 123 456</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Page -->
+        <section id="admin" class="page">
+            <div class="container">
+                <h1>Panel de Administración</h1>
+                
+                <!-- Admin Tabs -->
+                <div class="admin-tabs">
+                    <button class="tab-button active" data-tab="bots">
+                        <i class="fas fa-robot"></i> Control de Bots
+                    </button>
+                    <button class="tab-button" data-tab="users">
+                        <i class="fas fa-users"></i> Gestión de Usuarios
+                    </button>
+                    <button class="tab-button" data-tab="stats">
+                        <i class="fas fa-chart-bar"></i> Estadísticas
+                    </button>
+                    <button class="tab-button" data-tab="troubleshoot">
+                        <i class="fas fa-tools"></i> Resolución de Conflictos
+                    </button>
+                    <button class="tab-button" data-tab="store-manager">
+                        <i class="fas fa-store"></i> Gestión de Tienda
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Bots Tab -->
+                    <div id="bots-tab" class="tab-panel active">
+                        <div class="admin-section">
+                            <h2>Control de Bots</h2>
+                            <div class="bots-control">
+                                <div class="bot-status">
+                                    <label>
+                                        <input type="checkbox" id="botsEnabled" checked>
+                                        Bots Activos
+                                    </label>
+                                </div>
+                                <div class="bots-list" id="botsList">
+                                    <!-- Bots will be loaded here -->
+                                </div>
+                                <div class="bot-actions">
+                                    <button class="btn btn-primary" onclick="addBot()">
+                                        <i class="fas fa-plus"></i> Añadir Bot
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="resetBots()">
+                                        <i class="fas fa-refresh"></i> Resetear Bots
+                                    </button>
+                                </div>
+                                
+                                <!-- Control Especial de Bots -->
+                                <div class="bot-special-control">
+                                    <h3><i class="fas fa-crown"></i> Control de Victoria Forzada</h3>
+                                    <div class="special-controls">
+                                        <div class="control-card">
+                                            <p>Fuerza que un bot específico gane una subasta automáticamente</p>
+                                            <div class="control-form">
+                                                <div class="form-row">
+                                                    <div class="form-group">
+                                                        <label>Bot a forzar:</label>
+                                                        <select id="forceWinBot" class="form-control">
+                                                            <option value="">Seleccionar bot...</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Subasta objetivo:</label>
+                                                        <select id="forceWinAuction" class="form-control">
+                                                            <option value="">Seleccionar subasta...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-buttons">
+                                                    <button class="btn btn-warning" onclick="activateForcedWin()">
+                                                        <i class="fas fa-magic"></i> Activar Victoria Forzada
+                                                    </button>
+                                                    <button class="btn btn-secondary" onclick="deactivateForcedWin()">
+                                                        <i class="fas fa-times"></i> Desactivar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div id="forcedWinStatus" class="status-display" style="display: none;">
+                                                <i class="fas fa-crown"></i> <span id="forcedWinText"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Tab -->
+                    <div id="users-tab" class="tab-panel">
+                        <div class="admin-section">
+                            <h2>Gestión de Usuarios</h2>
+                            <div class="users-control">
+                                <div class="users-stats">
+                                    <div class="stat">
+                                        <span id="totalUsers">0</span>
+                                        <label>Total Usuarios</label>
+                                    </div>
+                                    <div class="stat">
+                                        <span id="activeUsers">0</span>
+                                        <label>Usuarios Activos</label>
+                                    </div>
+                                    <div class="stat">
+                                        <span id="totalTokens">0</span>
+                                        <label>Tokens Totales</label>
+                                    </div>
+                                </div>
+                                <div class="users-list" id="usersList">
+                                    <!-- Usuarios se cargarán aquí -->
+                                </div>
+                                <div class="users-actions" style="margin-top: 20px;">
+                                    <button class="btn btn-primary" onclick="openGiftTokensModal()">
+                                        <i class="fas fa-gift"></i> Regalar Tokens
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Tab -->
+                    <div id="stats-tab" class="tab-panel">
+                        <div class="admin-section">
+                            <h2>Estadísticas Generales</h2>
+                            <div class="stats-grid">
+                                <div class="stats-section">
+                                    <h3>Estadísticas de Bots</h3>
+                                    <div class="bots-stats">
+                                        <div class="stat">
+                                            <span id="totalBotBids">0</span>
+                                            <label>Pujas de Bots</label>
+                                        </div>
+                                        <div class="stat">
+                                            <span id="activeBots">5</span>
+                                            <label>Bots Activos</label>
+                                        </div>
+                                        <div class="stat">
+                                            <span id="botActivity">0</span>
+                                            <label>Actividad (24h)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="stats-section">
+                                    <h3>Estadísticas de Subastas</h3>
+                                    <div class="auctions-stats">
+                                        <div class="stat">
+                                            <span id="totalAuctions">0</span>
+                                            <label>Total Subastas</label>
+                                        </div>
+                                        <div class="stat">
+                                            <span id="activeAuctions">0</span>
+                                            <label>Subastas Activas</label>
+                                        </div>
+                                        <div class="stat">
+                                            <span id="totalBids">0</span>
+                                            <label>Total Pujas</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Troubleshoot Tab -->
+                    <div id="troubleshoot-tab" class="tab-panel">
+                        <div class="admin-section">
+                            <h2><i class="fas fa-tools"></i> Herramientas de Resolución de Conflictos</h2>
+                            <div class="troubleshoot-container">
+                                
+                                <!-- Data Integrity -->
+                                <div class="troubleshoot-section">
+                                    <h3><i class="fas fa-database"></i> Integridad de Datos</h3>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-info" onclick="checkDataIntegrity()">
+                                            <i class="fas fa-search"></i> Verificar Integridad
+                                        </button>
+                                        <button class="btn btn-warning" onclick="fixDataCorruption()">
+                                            <i class="fas fa-wrench"></i> Reparar Datos Corruptos
+                                        </button>
+                                        <button class="btn btn-primary" onclick="optimizeDatabase()">
+                                            <i class="fas fa-tachometer-alt"></i> Optimizar Base de Datos
+                                        </button>
+                                    </div>
+                                    <div id="dataIntegrityResults" class="results-container"></div>
+                                </div>
+
+                                <!-- Auction Issues -->
+                                <div class="troubleshoot-section">
+                                    <h3><i class="fas fa-gavel"></i> Problemas de Subastas</h3>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-danger" onclick="fixStuckAuctions()">
+                                            <i class="fas fa-unlock"></i> Resolver Subastas Bloqueadas
+                                        </button>
+                                        <button class="btn btn-warning" onclick="resetAuctionTimers()">
+                                            <i class="fas fa-clock"></i> Resetear Contadores
+                                        </button>
+                                        <button class="btn btn-info" onclick="validateBids()">
+                                            <i class="fas fa-hand-paper"></i> Validar Pujas
+                                        </button>
+                                    </div>
+                                    <div id="auctionIssuesResults" class="results-container"></div>
+                                </div>
+
+                                <!-- User Issues -->
+                                <div class="troubleshoot-section">
+                                    <h3><i class="fas fa-users"></i> Problemas de Usuarios</h3>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-success" onclick="fixDuplicateUsers()">
+                                            <i class="fas fa-user-times"></i> Eliminar Usuarios Duplicados
+                                        </button>
+                                        <button class="btn btn-warning" onclick="resetUserSessions()">
+                                            <i class="fas fa-sign-out-alt"></i> Resetear Sesiones
+                                        </button>
+                                        <button class="btn btn-info" onclick="validateTokenBalances()">
+                                            <i class="fas fa-coins"></i> Validar Balances de Tokens
+                                        </button>
+                                    </div>
+                                    <div id="userIssuesResults" class="results-container"></div>
+                                </div>
+
+                                <!-- System Cleanup -->
+                                <div class="troubleshoot-section">
+                                    <h3><i class="fas fa-broom"></i> Limpieza del Sistema</h3>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-secondary" onclick="clearExpiredData()">
+                                            <i class="fas fa-trash-alt"></i> Limpiar Datos Expirados
+                                        </button>
+                                        <button class="btn btn-info" onclick="compactStorage()">
+                                            <i class="fas fa-compress"></i> Compactar Almacenamiento
+                                        </button>
+                                        <button class="btn btn-primary" onclick="generateSystemReport()">
+                                            <i class="fas fa-file-alt"></i> Generar Reporte Completo
+                                        </button>
+                                    </div>
+                                    <div id="systemCleanupResults" class="results-container"></div>
+                                </div>
+
+                                <!-- Emergency Actions -->
+                                <div class="troubleshoot-section emergency">
+                                    <h3><i class="fas fa-exclamation-triangle"></i> Acciones de Emergencia</h3>
+                                    <div class="emergency-warning">
+                                        <i class="fas fa-warning"></i>
+                                        <strong>¡PRECAUCIÓN!</strong> Estas acciones son irreversibles
+                                    </div>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-danger" onclick="emergencyStopAllAuctions()">
+                                            <i class="fas fa-stop"></i> Detener Todas las Subastas
+                                        </button>
+                                        <button class="btn btn-danger" onclick="emergencyResetSystem()">
+                                            <i class="fas fa-redo"></i> Reset Completo del Sistema
+                                        </button>
+                                        <button class="btn btn-danger" onclick="emergencyBackupAndClear()">
+                                            <i class="fas fa-database"></i> Backup y Limpieza Total
+                                        </button>
+                                    </div>
+                                    <div id="emergencyResults" class="results-container"></div>
+                                </div>
+
+                                <!-- System Log -->
+                                <div class="troubleshoot-section">
+                                    <h3><i class="fas fa-terminal"></i> Log del Sistema</h3>
+                                    <div class="troubleshoot-actions">
+                                        <button class="btn btn-info" onclick="showSystemLog()">
+                                            <i class="fas fa-eye"></i> Ver Log Completo
+                                        </button>
+                                        <button class="btn btn-secondary" onclick="clearSystemLog()">
+                                            <i class="fas fa-eraser"></i> Limpiar Log
+                                        </button>
+                                        <button class="btn btn-primary" onclick="exportLog()">
+                                            <i class="fas fa-download"></i> Exportar Log
+                                        </button>
+                                    </div>
+                                    <div id="systemLog" class="log-container"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Store Manager Tab -->
+                    <div id="store-manager-tab" class="tab-panel">
+                        <div class="admin-section">
+                            <h2><i class="fas fa-store"></i> Gestión de Tienda ArtBiddo</h2>
+                            
+                            <!-- Add New Artwork Form -->
+                            <div class="store-form-container">
+                                <h3>Agregar Nueva Obra</h3>
+                                <form id="addArtworkForm" class="artwork-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="artworkTitle">Título de la Obra *</label>
+                                            <input type="text" id="artworkTitle" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="artistName">Nombre del Artista *</label>
+                                            <input type="text" id="artistName" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="artworkCategory">Categoría *</label>
+                                            <select id="artworkCategory" required>
+                                                <option value="">Seleccionar categoría</option>
+                                                <option value="Pintura">Pintura</option>
+                                                <option value="Escultura">Escultura</option>
+                                                <option value="Fotografía">Fotografía</option>
+                                                <option value="Arte Digital">Arte Digital</option>
+                                                <option value="Grabado">Grabado</option>
+                                                <option value="Cerámica">Cerámica</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="artworkYear">Año de Creación</label>
+                                            <input type="number" id="artworkYear" min="1900" max="2024">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="storePrice">Precio Tienda (tokens) *</label>
+                                            <input type="number" id="storePrice" min="50" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="auctionStartPrice">Precio Inicial Subasta (tokens) *</label>
+                                            <input type="number" id="auctionStartPrice" min="10" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="auctionDuration">Duración Subasta (horas) *</label>
+                                            <select id="auctionDuration" required>
+                                                <option value="24">24 horas</option>
+                                                <option value="48">48 horas</option>
+                                                <option value="72">72 horas</option>
+                                                <option value="168">1 semana</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="artworkDimensions">Dimensiones</label>
+                                            <input type="text" id="artworkDimensions" placeholder="ej: 50x70 cm">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="artworkDescription">Descripción *</label>
+                                        <textarea id="artworkDescription" rows="4" required placeholder="Descripción detallada de la obra, técnicas utilizadas, inspiración..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="artistBio">Biografía del Artista</label>
+                                        <textarea id="artistBio" rows="3" placeholder="Formación académica, certificaciones, logros..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="artworkImages">URLs de Imágenes (una por línea) *</label>
+                                        <textarea id="artworkImages" rows="3" required placeholder="https://ejemplo.com/imagen1.jpg
+https://ejemplo.com/imagen2.jpg"></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Crear Obra y Subasta
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" onclick="clearArtworkForm()">
+                                            <i class="fas fa-eraser"></i> Limpiar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Current Store Items -->
+                            <div class="store-items-manager">
+                                <h3>Obras Actuales en Tienda</h3>
+                                <div class="store-items-controls">
+                                    <button class="btn btn-info" onclick="refreshStoreManager()">
+                                        <i class="fas fa-sync"></i> Actualizar Lista
+                                    </button>
+                                    <button class="btn btn-warning" onclick="syncStoreWithAuctions()">
+                                        <i class="fas fa-link"></i> Sincronizar con Subastas
+                                    </button>
+                                </div>
+                                <div id="storeItemsList" class="store-items-list">
+                                    <!-- Los items se cargarán aquí dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Bot Edit Modal -->
+    <div id="botEditModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBotEditModal()">&times;</span>
+            <h2>Editar Bot</h2>
+            <form id="botEditForm">
+                <div class="form-group">
+                    <label for="editBotName">Nombre del Bot</label>
+                    <input type="text" id="editBotName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBotTokens">Tokens Disponibles</label>
+                    <input type="number" id="editBotTokens" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBotAggressiveness">Agresividad (0-1)</label>
+                    <input type="number" id="editBotAggressiveness" min="0" max="1" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="editBotActive">
+                        Bot Activo
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-primary" onclick="saveBotEdit()">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeBotEditModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Edit Modal -->
+    <div id="userEditModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUserEditModal()">&times;</span>
+            <h2>Editar Usuario</h2>
+            <form id="userEditForm">
+                <div class="form-group">
+                    <label for="editUserName">Nombre</label>
+                    <input type="text" id="editUserName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserEmail">Email</label>
+                    <input type="email" id="editUserEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserTokens">Tokens</label>
+                    <input type="number" id="editUserTokens" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="editUserCard">Tarjeta (últimos 4 dígitos)</label>
+                    <input type="text" id="editUserCard" placeholder="****1234" maxlength="4">
+                </div>
+                <div class="form-group">
+                    <label for="editUserStatus">Estado</label>
+                    <select id="editUserStatus">
+                        <option value="active">Activo</option>
+                        <option value="suspended">Suspendido</option>
+                        <option value="banned">Baneado</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-primary" onclick="saveUserEdit()">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeUserEditModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gift Tokens Modal -->
+    <div id="giftTokensModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGiftTokensModal()">&times;</span>
+            <h2>Regalar Tokens</h2>
+            <form id="giftTokensForm">
+                <div class="form-group">
+                    <label for="giftUserEmail">Email del Usuario</label>
+                    <input type="email" id="giftUserEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="giftTokensAmount">Cantidad de Tokens</label>
+                    <input type="number" id="giftTokensAmount" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="giftTokensReason">Motivo (opcional)</label>
+                    <textarea id="giftTokensReason" rows="3" placeholder="Ej: Compensación por problema técnico"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-primary" onclick="sendGiftTokens()">Enviar Regalo</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeGiftTokensModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="auth-container">
+                <div id="loginForm" class="auth-form">
+                    <h2>Iniciar Sesión</h2>
+                    <form id="loginFormElement">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Contraseña</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                    </form>
+                    <p class="auth-switch">
+                        ¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Regístrate</a>
+                    </p>
+                </div>
+                <div id="registerForm" class="auth-form" style="display: none;">
+                    <h2>Registrarse</h2>
+                    <form id="registerFormElement">
+                        <div class="form-group">
+                            <label for="registerName">Nombre</label>
+                            <input type="text" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Contraseña</label>
+                            <input type="password" id="registerPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerConfirmPassword">Confirmar Contraseña</label>
+                            <input type="password" id="registerConfirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
+                    <p class="auth-switch">
+                        ¿Ya tienes cuenta? <a href="#" onclick="showLoginForm()">Inicia Sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auction Detail Modal -->
+    <div id="auctionModal" class="modal">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Auction details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bid Modal -->
+    <div id="bidModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="bidModalContent">
+                <!-- Bid form will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Modal -->
+    <div id="countdownModal" class="modal">
+        <div class="modal-content countdown-modal">
+            <div class="countdown-content">
+                <div class="countdown-timer">
+                    <span id="countdownSeconds">10</span>
+                </div>
+                <div class="last-bidder">
+                    <span id="lastBidderName">Nadie ha pujado aún</span>
+                </div>
+                <div class="countdown-message">
+                    ¡Haz tu puja antes de que termine el tiempo!
+                </div>
+                <div class="countdown-actions">
+                    <button class="btn btn-primary" onclick="showBidModalFromCountdown()">
+                        <i class="fas fa-hand-paper"></i> Pujar Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
